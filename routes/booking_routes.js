@@ -104,12 +104,13 @@ router.get("/room-types", async (request, response) => {
 router.get("/get-estimate", async (request, response) => {
   try {
     const { query } = request;
-    const { start, end, roomId, numberOfGuests } = query;
+    const { start, end, roomId, numberOfGuests, userId } = query;
     const { status, ...data } = await booking_service.estimatePrice(
       roomId,
       start,
       end,
-      numberOfGuests
+      numberOfGuests,
+      userId
     );
     return response.status(status).send({ ...data });
   } catch (err) {

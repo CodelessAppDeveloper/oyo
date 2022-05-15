@@ -14,11 +14,9 @@ app.use(cors(corsConfig));
 const apiRouter = require("./routes/routes");
 const roomRouter = require('./routes/room_routes');
 const bookingsRouter = require('./routes/booking_routes');
-
 app.get('/', (req, res) => {
   res.send('<h1>Hotel Booking Backend API endpoint</h1> <h4>Message: Success</h4> <p>Team Scrumdog Millionaires</p>');
 })
-
 app.use("/", apiRouter);
 app.use("/rooms", roomRouter);
 app.use("/bookings", bookingsRouter);

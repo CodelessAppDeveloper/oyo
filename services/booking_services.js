@@ -131,7 +131,7 @@ class BookingService {
           week_end_surge,
           festival_surge,
         }),
-        customer_rewards: await PricingService.customer_rewards_static(user_id),
+        customer_rewards: await PricingService.customer_rewards_static(userId),
       });
 
       const startDate = new Date(start);
@@ -256,7 +256,7 @@ class BookingService {
     }
   }
 
-  async estimatePrice(roomId, start, end, total_guests = 0) {
+  async estimatePrice(roomId, start, end, total_guests = 0, userId) {
     if (!IS_VALID_DATE(start) && !IS_VALID_DATE(end)) {
       return HTTP_RES(400, "Invalid date format");
     }
@@ -288,7 +288,7 @@ class BookingService {
         week_end_surge,
         festival_surge,
       }),
-      customer_rewards: PricingService.customer_rewards(),
+      customer_rewards: await PricingService.customer_rewards_static(userId),
     });
 
     return HTTP_RES(200, "Estimated Price", { finalPrice });
