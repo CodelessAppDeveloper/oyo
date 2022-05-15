@@ -21,7 +21,7 @@ router.get("/:room_id?", async (request, response) => {
  */
 router.use("/", SSecurity.authenticate_admin);
 
-router.post("/", async (request, response) => {
+router.post("/addnewroom", async (request, response) => {
   const { params, body } = request;
   const { hotel_id } = params;
   try {
