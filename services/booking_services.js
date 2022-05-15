@@ -131,7 +131,7 @@ class BookingService {
           week_end_surge,
           festival_surge,
         }),
-        customer_rewards: PricingService.customer_rewards(),
+        customer_rewards: await PricingService.customer_rewards_static(user_id),
       });
 
       const startDate = new Date(start);

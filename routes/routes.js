@@ -1,7 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const { hashedPassword } = require("../Utilities/hashing");
-
+const PricingService = require("./../services/pricing_service");
+const pricing_service = new PricingService();
 // Importing the model
 const apiModel = require("../models/model");
 
@@ -90,6 +91,20 @@ router.post("/register", async (req, res, next) => {
     res.status(500).json({
       error: e,
     });
+  }
+});
+
+router.get("/getPoints/:userId?", async (request, response) => {
+  const { params } = request;
+  const { room_id } = params;
+  try {
+    // const { status, ...data } = await room_service.getRooms(room_id);
+    const rewards = await pricing_service.customer_rewards(room_id);
+    console.log(rewards);
+    return response.status(200).send({ rewards });
+  } catch (err) {
+    console.error(`HotelRoutes::GET /rooms:: Internal server error \n${err}`);
+    return response.status(500).send({ msg: "Internal  Server Error" });
   }
 });
 

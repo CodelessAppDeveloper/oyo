@@ -55,4 +55,16 @@ apiModel.register = (dataJson, table) => {
   });
 };
 
+apiModel.updatePoints = (table, id) => {
+  return new Promise((resolve, reject) => {
+    // SQL query to fetch user details
+    let query =
+      "UPDATE " + table + " set points = " + points + " where id = " + id + ";";
+    db.query(query, (err, results) => {
+      if (err) return reject(err);
+      return resolve(results);
+    });
+  });
+};
+
 module.exports = apiModel;

@@ -4,6 +4,9 @@ const router = express.Router();
 const RoomService = require("./../services/room_service");
 const room_service = new RoomService();
 
+const PricingService = require("./../services/pricing_service");
+const pricing_service = new PricingService();
+
 router.get("/:room_id?", async (request, response) => {
   const { params } = request;
   const { room_id } = params;
